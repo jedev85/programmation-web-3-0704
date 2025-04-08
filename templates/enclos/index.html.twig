@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enclos{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <a class="btn btn-info" href="{{ path('enclos_add') }}">Créer un bel enclos</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Température</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for enclo in enclos %}
+                <tr>
+                    <td>{{enclo.id}}</td>
+                    <td>{{enclo.nom}}</td>
+                    <td>{{enclo.temperature}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+{% endblock %}
