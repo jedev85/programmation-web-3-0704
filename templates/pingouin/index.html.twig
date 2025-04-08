@@ -3,8 +3,10 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<div class="container">
-    <a class="btn btn-info" href="{{ path('pingouin_add') }}">Créer un pingouin qui glisse le plus loin</a>
+<div class="container mt-5">
+    <div class="col-sm-12 text-end">
+        <a class="btn btn-info" href="{{ path('pingouin_add') }}">Créer un pingouin qui glisse le plus loin</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -13,7 +15,7 @@
                 <th>Age</th>
                 <th>Couleur</th>
                 <th>Enclos</th>
-                <th></th>
+                <th>Soigneur</th>
                 <th></th>
             </tr>
         </thead>
@@ -25,6 +27,7 @@
                     <td>{{pingouin.age}}</td>
                     <td>{{pingouin.couleur}}</td>
                     <td>{{pingouin.enclos}}</td>
+                    <td>{{pingouin.soigneur}}</td>
                     <td><a href="{{ path('pingouin_edit',{'id':pingouin.id}) }}">Éditer</a></td>
                 </tr>
             {% endfor %}

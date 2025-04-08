@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="col-sm-12 text-end">
+        <a class="btn btn-info" href="{{ path('soigneur_add') }}">Créer un soigneur bienveillant</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Spécialité</th>
+                <th>Nombre de pingouins</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for soigneur in soigneurs %}
+                <tr>
+                    <td>{{soigneur.id}}</td>
+                    <td>{{soigneur.nom}}</td>
+                    <td>{{soigneur.speciality.value}}</td>
+                    <td>{{soigneur.pingouins.count()}}</td>
+                    <td><a href="{{ path('soigneur_edit',{'id':soigneur.id}) }}">Éditer</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+{% endblock %}

@@ -26,6 +26,9 @@ class Pingouin
     #[ORM\JoinColumn(nullable: false)]
     private ?Enclos $enclos = null;
 
+    #[ORM\ManyToOne(inversedBy: 'pingouins')]
+    private ?Soigneur $soigneur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Pingouin
     public function setEnclos(?Enclos $enclos): static
     {
         $this->enclos = $enclos;
+
+        return $this;
+    }
+
+    public function getSoigneur(): ?Soigneur
+    {
+        return $this->soigneur;
+    }
+
+    public function setSoigneur(?Soigneur $soigneur): static
+    {
+        $this->soigneur = $soigneur;
 
         return $this;
     }

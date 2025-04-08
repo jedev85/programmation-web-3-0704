@@ -3,8 +3,10 @@
 {% block title %}Enclos{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <a class="btn btn-info" href="{{ path('enclos_add') }}">Créer un bel enclos</a>
+    <div class="container mt-5">
+        <div class="col-sm-12 text-end">
+            <a class="btn btn-info" href="{{ path('enclos_add') }}">Créer un bel enclos</a>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -20,6 +22,7 @@
                     <td>{{enclo.id}}</td>
                     <td>{{enclo.nom}}</td>
                     <td>{{enclo.temperature}}</td>
+                    <td><a href="{{ path('enclos_edit',{'id':enclo.id}) }}">Éditer</a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -3,11 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Enclos;
-use App\Entity\Pingouin;
 use App\Form\EnclosType;
-use App\Form\PingouinType;
 use App\Repository\EnclosRepository;
-use App\Repository\PingouinRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +43,7 @@ final class EnclosController extends AbstractController
             return $this->redirectToRoute('app_enclos_index');
         }
 
-        return $this->render('enclos/add_or_edit_enclos.html.twig', [
+        return $this->render('form/add_or_edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -72,7 +69,7 @@ final class EnclosController extends AbstractController
             return $this->redirectToRoute('app_enclos_index');
         }
 
-        return $this->render('enclos/add_or_edit_enclos.html.twig', [
+        return $this->render('form/add_or_edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
