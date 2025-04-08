@@ -21,5 +21,8 @@ Pingouin (Va générer PingouinController.php)
 
 ### Pense bête
 
-git init
-git remote add origin https://github.com/jedev85/programmation-web-3-0704.git
+git init — à ne faire que la première fois
+git remote add origin https://github.com/jedev85/programmation-web-3-0704.git— à ne faire que la première fois
+
+git stash
+git pull
