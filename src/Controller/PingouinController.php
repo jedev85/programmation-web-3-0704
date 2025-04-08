@@ -43,7 +43,7 @@ final class PingouinController extends AbstractController
             $this->entityManager->persist($pingouin);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_pingouin_index');
         }
 
         return $this->render('form/add_or_edit.html.twig', [

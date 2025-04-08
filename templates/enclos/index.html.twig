@@ -13,6 +13,7 @@
                 <th>ID</th>
                 <th>Nom</th>
                 <th>Température</th>
+                <th>Nombre de pingouins</th>
                 <th></th>
             </tr>
             </thead>
@@ -22,6 +23,7 @@
                     <td>{{enclo.id}}</td>
                     <td>{{enclo.nom}}</td>
                     <td>{{enclo.temperature}}</td>
+                    <td>{{enclo.pingouins.count()}}</td>
                     <td><a href="{{ path('enclos_edit',{'id':enclo.id}) }}">Éditer</a></td>
                 </tr>
             {% endfor %}
