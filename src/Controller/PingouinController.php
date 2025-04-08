@@ -21,9 +21,13 @@ final class PingouinController extends AbstractController
     }
 
     #[Route('/pingouin', name: 'app_pingouin_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $pingouins = $this->pingouinRepository->findAll();
+
+        if ($request->get('search')){
+            $pingouins = $this->pingouinRepository->findBy(['nom' => $request->get('search')]);
+        }
 
         return $this->render('pingouin/index.html.twig', [
             'pingouins' => $pingouins,

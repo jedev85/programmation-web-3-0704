@@ -18,9 +18,12 @@ final class EnclosController extends AbstractController
     }
 
     #[Route('/enclos', name: 'app_enclos_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $enclos = $this->enclosRepository->findAll();
+        if ($request->get('search')){
+            $enclos = $this->enclosRepository->findBy(['nom' => $request->get('search')]);
+        }
 
         return $this->render('enclos/index.html.twig', [
             'enclos' => $enclos,

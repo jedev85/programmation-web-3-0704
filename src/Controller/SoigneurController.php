@@ -22,9 +22,12 @@ final class SoigneurController extends AbstractController
     }
 
     #[Route('/soigneur', name: 'app_soigneur_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $soigneurs = $this->soigneurRepository->findAll();
+        if ($request->get('search')){
+            $soigneurs = $this->soigneurRepository->findBy(['nom' => $request->get('search')]);
+        }
 
         return $this->render('soigneur/index.html.twig', [
             'soigneurs' => $soigneurs,
