@@ -26,7 +26,7 @@ final class PingouinController extends AbstractController
         $pingouins = $this->pingouinRepository->findAll();
 
         if ($request->get('search')){
-            $pingouins = $this->pingouinRepository->findBy(['nom' => $request->get('search')]);
+            $pingouins = $this->pingouinRepository->findBy(['prenom' => $request->get('search')]);
         }
 
         return $this->render('pingouin/index.html.twig', [
