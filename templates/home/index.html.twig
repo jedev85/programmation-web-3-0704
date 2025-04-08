@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a href="{{ path('pingouin_add') }}">Créer un pingouin qui glisse le plus loin</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Prénom</th>
+                <th>Age</th>
+                <th>Couleur</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pingouin in pingouins %}
+                <tr>
+                    <td>{{pingouin.id}}</td>
+                    <td>{{pingouin.prenom}}</td>
+                    <td>{{pingouin.age}}</td>
+                    <td>{{pingouin.couleur}}</td>
+                    <td><a href="{{ path('pingouin_show',{'id':pingouin.id}) }}">Voir</a></td>
+                    <td><a href="{{ path('pingouin_edit',{'id':pingouin.id}) }}">Éditer</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+{% endblock %}
