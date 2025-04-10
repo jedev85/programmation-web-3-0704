@@ -23,14 +23,12 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $email = 'jeremie.devin@ynov.com';
-        $password_plain = 'popopo';
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $_ENV['EMAIL']]);
         if (!$user) {
             $user = new User();
-            $user->setEmail($email);
+            $user->setEmail($_ENV['EMAIL']);
             $user->setRoles(['ROLE_ADMIN']);
-            $password = $this->hasher->hashPassword($user, $password_plain);
+            $password = $this->hasher->hashPassword($user, $_ENV['PASSWORD']);
             $user->setPassword($password);
             $manager->persist($user);
             $manager->flush();
