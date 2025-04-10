@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class PingouinController extends AbstractController
 {
@@ -35,6 +36,7 @@ final class PingouinController extends AbstractController
     }
 
     #[Route('/pingouin/add', name: 'pingouin_add')]
+    #[isGranted('ROLE_USER')]
     public function add(Request $request): Response
     {
         $pingouin = new Pingouin();
@@ -56,6 +58,7 @@ final class PingouinController extends AbstractController
     }
 
     #[Route('/pingouin/{id}/edit', name: 'pingouin_edit')]
+    #[isGranted('ROLE_USER')]
     public function edit(Request $request): Response
     {
         $pingouin = $this->pingouinRepository->find($request->get('id'));
