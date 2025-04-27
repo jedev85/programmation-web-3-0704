@@ -7,6 +7,10 @@ use App\Entity\Enum\Speciality;
 use App\Entity\Pingouin;
 use App\Entity\Soigneur;
 use App\Entity\User;
+use App\Factory\EnclosFactory;
+use App\Factory\PingouinFactory;
+use App\Factory\RepasFactory;
+use App\Factory\SoigneurFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -34,37 +38,14 @@ class AppFixtures extends Fixture
             $manager->flush();
         }
 
-        $soigneurs = [];
-        $enclos = [];
+        SoigneurFactory::createMany(20);
 
-        for ($i = 0; $i < 10; $i++) {
-            $soigneur = new Soigneur();
-            $soigneur->setNom('Paul '.$i);
-            $soigneur->setSpeciality(Speciality::GestionMédicaments);
-            $manager->persist($soigneur);
-            $soigneurs[] = $soigneur;
-        }
+        EnclosFactory::createMany(20);
 
+        PingouinFactory::createMany(50);
 
-        for ($i = 0; $i < 10; $i++) {
-            $enclo = new Enclos();
-            $enclo->setNom('Enclos '.$i);
-            $enclo->setTemperature(rand(1, 30));
-            $manager->persist($enclo);
-            $enclos[] = $enclo;
-        }
+        RepasFactory::createMany(100);
 
-        for ($i = 0; $i < 20; $i++) {
-            $pingouin = new Pingouin();
-            $pingouin->setAge(rand(1,30));
-            $pingouin->setCouleur('Blanc');
-            $pingouin->setPrenom('Pingouin '.$i);
-            $pingouin->setEnclos($enclos[rand(1,count($enclos)-1)]);
-            $pingouin->setSoigneur($soigneurs[rand(1,count($soigneurs)-1)]);
-            $manager->persist($pingouin);
-        }
-
-        $manager->persist($soigneur);
         $manager->flush();
     }
 }

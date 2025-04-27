@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class PingouinController extends AbstractController
 {
+
     public function __construct(
         private readonly PingouinRepository $pingouinRepository,
         private readonly EntityManagerInterface $entityManager,
@@ -81,6 +82,21 @@ final class PingouinController extends AbstractController
 
         return $this->render('form/add_or_edit.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/pingouin/{id}/show', name: 'pingouin_show')]
+    #[isGranted('ROLE_USER')]
+    public function show(Request $request): Response
+    {
+        $pingouin = $this->pingouinRepository->find($request->get('id'));
+
+        if (null === $pingouin) {
+            return $this->redirectToRoute('app_pingouin_index');
+        }
+
+        return $this->render('pingouin/show.html.twig', [
+            'pingouin' => $pingouin,
         ]);
     }
 }

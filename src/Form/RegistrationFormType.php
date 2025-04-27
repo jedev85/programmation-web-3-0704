@@ -19,11 +19,19 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [])
+            ->add('email', EmailType::class, ['attr' => ['class' => 'form-control']])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control'],
+                'first_options'  => [
+                    'label' => 'Mot de passe',
+                    'attr' => ['class' => 'form-control']
+                ],
+                'second_options' => [
+                    'label' => 'Confirmation mot de passe',
+                    'attr' => ['class' => 'form-control']
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

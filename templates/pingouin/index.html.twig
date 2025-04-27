@@ -17,6 +17,7 @@
                 <th>Enclos</th>
                 <th>Soigneur</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +26,11 @@
                     <td>{{pingouin.id}}</td>
                     <td>{{pingouin.prenom}}</td>
                     <td>{{pingouin.age}}</td>
-                    <td>{{pingouin.couleur}}</td>
+                    <td>{{pingouin.color.value}}</td>
                     <td>{{pingouin.enclos}}</td>
                     <td>{{pingouin.soigneur}}</td>
-                    <td><a href="{{ path('pingouin_edit',{'id':pingouin.id}) }}">Éditer</a></td>
+                    <td><a href="{{ path('pingouin_edit',{'id':pingouin.id}) }}"><i class="fa-solid fa-pen"></i></a></td>
+                    <td><a href="{{ path('pingouin_show',{'id':pingouin.id}) }}"><i class="fa-solid fa-eye"></i></a></td>
                 </tr>
             {% endfor %}
         </tbody>

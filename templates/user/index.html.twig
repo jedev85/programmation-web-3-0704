@@ -11,20 +11,14 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nom</th>
-                <th>Spécialité</th>
-                <th>Nombre de pingouins</th>
-                <th></th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
-            {% for soigneur in soigneurs %}
+            {% for user in users %}
                 <tr>
-                    <td>{{soigneur.id}}</td>
-                    <td>{{soigneur.nom}}</td>
-                    <td>{{soigneur.speciality.value}}</td>
-                    <td>{{soigneur.pingouins.count()}}</td>
-                    <td><a href="{{ path('soigneur_edit',{'id':soigneur.id}) }}"><i class="fa-solid fa-pen"></i></a></td>
+                    <td>{{user.id}}</td>
+                    <td>{{user.email}}</td>
                 </tr>
             {% endfor %}
         </tbody>

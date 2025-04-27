@@ -24,7 +24,7 @@
                     <td>{{enclo.nom}}</td>
                     <td>{{enclo.temperature}}</td>
                     <td>{{enclo.pingouins.count()}}</td>
-                    <td><a href="{{ path('enclos_edit',{'id':enclo.id}) }}">Éditer</a></td>
+                    <td><a href="{{ path('enclos_edit',{'id':enclo.id}) }}"><i class="fa-solid fa-pen"></i></a></a></td>
                 </tr>
             {% endfor %}
             </tbody>

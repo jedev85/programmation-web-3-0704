@@ -2,13 +2,32 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\PingouinRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    )
+    {
+    }
+
+    #[isGranted('ROLE_ADMIN')]
+    #[Route(path: '/users', name: 'app_user_index', methods: ['GET'])]
+    public function index(): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'users' => $this->entityManager->getRepository(User::class)->findAll(),
+        ]);
+    }
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

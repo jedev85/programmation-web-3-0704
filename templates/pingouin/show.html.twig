@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="col-sm-12 mt-5">
+        <div class="col-sm-12 text-end">
+            <a class="btn btn-info mb-2" href="{{ path('repas_add', {'pingouin_id': pingouin.id}) }}">Créer un repas délicieux</a>
+        </div>
+        <div class="col-sm-12 mt-2 mb-2">
+            {{pingouin.prenom}}
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Quantité</th>
+                    <th>Types</th>
+                    <th>A été mangé entièrement</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repas in pingouin.repas %}
+                    <tr>
+                        <td>{{repas.quantite}}</td>
+                        <td>{{repas.type.value}}</td>
+                        <td>
+                            {% if repas.isEat %}
+                                Oui
+                            {% else %}
+                                Non
+                            {% endif %}
+                        </td>
+                        <td>{{repas.date|date("d/m/Y", "Europe/Paris")}}</td>
+                        <td><a href="{{ path('repas_edit',{'id':repas.id}) }}"><i class="fa-solid fa-pen"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <img id="pingouin" src="https://www.freeiconspng.com/uploads/penguin-png-0.png" alt="Pingouin mignon" />
+        <style>
+            body {
+                margin: 0;
+                background: linear-gradient(to top, #a0e9ff, #fff);
+                overflow: hidden;
+            }
+
+            #pingouin {
+                position: absolute;
+                width: 15%;
+                animation: bounce 1s infinite;
+                transition: transform 0.5s ease;
+            }
+
+            @keyframes bounce {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-30px);
+                }
+            }
+
+            .flake {
+                position: absolute;
+                top: -50px;
+                color: white;
+                font-size: 1.2em;
+                animation: fall linear infinite;
+                user-select: none;
+            }
+
+            @keyframes fall {
+                to {
+                    transform: translateY(110vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        </style>
+        <script>
+            const pingouin = document.getElementById('pingouin');
+
+            function randomPosition() {
+                const maxX = window.innerWidth - 100;
+                const maxY = window.innerHeight - 100;
+                const x = Math.floor(Math.random() * maxX);
+                const y = Math.floor(Math.random() * maxY);
+                return { x, y };
+            }
+
+            function movePingouin() {
+                const { x, y } = randomPosition();
+                pingouin.style.left = `${x}px`;
+                pingouin.style.top = `${y}px`;
+            }
+
+            setInterval(movePingouin, 1500);
+            movePingouin();
+
+            // Générateur de flocons
+            function createSnowflake() {
+                const flake = document.createElement('div');
+                flake.classList.add('flake');
+                flake.innerHTML = '❄️';
+                flake.style.left = Math.random() * window.innerWidth + 'px';
+                flake.style.animationDuration = (3 + Math.random() * 5) + 's';
+                flake.style.opacity = Math.random();
+                flake.style.fontSize = (12 + Math.random() * 20) + 'px';
+
+                document.body.appendChild(flake);
+
+                setTimeout(() => {
+                    flake.remove();
+                }, 8000);
+            }
+
+            setInterval(createSnowflake, 200);
+        </script>
+    </div>
+</div>
+{% endblock %}
